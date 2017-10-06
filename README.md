@@ -6,6 +6,8 @@ Stress-test inconsistent parts of your [Mocha](https://mochajs.org/) test suite 
 
 ## Installation
 
+mocha-stress requires node.js >= 4.
+
 ```sh
 # Install the package from npm
 $ npm install --save-dev mocha-stress
