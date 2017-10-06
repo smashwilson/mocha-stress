@@ -1,5 +1,7 @@
 # Mocha Stress
 
+[![Build Status](https://travis-ci.org/smashwilson/mocha-stress.svg?branch=master)](https://travis-ci.org/smashwilson/mocha-stress)
+
 Stress-test inconsistent parts of your [Mocha](https://mochajs.org/) test suite to identify and correct flaky tests.
 
 ## Installation
