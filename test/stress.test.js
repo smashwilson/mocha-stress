@@ -7,18 +7,35 @@ var exec = require('child_process').exec
 
 function runExample (testName, callback) {
   var modulePath = path.join(__dirname, '..', 'install')
-  var exampleTestPath = path.join(__dirname, 'example.test.js')
+  var exampleTestPath = path.join(__dirname, 'fixtures', testName + '.test.js')
 
   exec(
-    'mocha -r ' + modulePath + ' ' + exampleTestPath,
-    {
-      env: {
-        MOCHA_STRESS_TEST: testName,
-        PATH: process.env.PATH
-      },
-      timeout: 1000
-    },
-    callback
+    'mocha --require ' + modulePath + ' --reporter json ' + exampleTestPath,
+    { timeout: 2000 },
+    function (err, stdout, stderr) {
+      var result = null
+      try {
+        result = JSON.parse(stdout)
+      } catch (e) {
+        console.error('unable to parse stdout as JSON:\n' + stdout)
+      }
+
+      if (err || !result) {
+        if (result) {
+          err.message = 'Test failures:\n'
+          result.failures.forEach(function (f) {
+            err.message += f.fullTitle
+            err.message += '\n'
+            err.message += f.err.message
+            err.message += '\n'
+          })
+        }
+
+        return callback(err, stdout, stderr)
+      }
+
+      callback(err, result, stderr)
+    }
   )
 }
 
