@@ -5,7 +5,7 @@
   "main": "install.js",
   "scripts": {
     "lint": "standard",
-    "test": "mocha test/stress.test.js"
+    "test": "npm run lint && mocha test/stress.test.js"
   },
   "repository": {
     "type": "git",
