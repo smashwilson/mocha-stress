@@ -4,7 +4,8 @@
   "description": "Re-run flaky Mocha tests to flush out inconsistent results",
   "main": "install.js",
   "scripts": {
-    "test": "mocha"
+    "lint": "standard",
+    "test": "mocha test/stress.test.js"
   },
   "repository": {
     "type": "git",
